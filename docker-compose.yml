@@ -1,0 +1,44 @@
+version: "3.1"
+services:
+
+  webserver:
+    image: nginx:alpine
+    container_name: webserver
+    working_dir: /application
+    volumes:
+      - .:/application
+      - ./phpdocker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./phpdocker/nginx/nginx56.conf:/etc/nginx/conf.d/nginx56.conf
+      - ./phpdocker/nginx/nginx71.conf:/etc/nginx/conf.d/nginx71.conf
+      - ./phpdocker/nginx/nginx73.conf:/etc/nginx/conf.d/nginx73.conf
+    ports:
+      - "8056:56"
+      - "8071:71"
+      - "8073:73"
+
+  php56:
+    build: phpdocker/php56-fpm
+    container_name: php56
+    working_dir: /application
+    volumes:
+      - .:/application
+      - ./phpdocker/php56-fpm/php-ini-overrides.ini:/etc/php5/fpm/conf.d/99-overrides.ini
+      - ./phpdocker/php56-fpm/www.conf:/etc/php5/fpm/pool.d/www.conf
+
+  php71:
+    build: phpdocker/php71-fpm
+    container_name: php71
+    working_dir: /application
+    volumes:
+      - .:/application
+      - ./phpdocker/php71-fpm/php-ini-overrides.ini:/etc/php/7.1/fpm/conf.d/99-overrides.ini
+      - ./phpdocker/php71-fpm/z-overrides.conf:/etc/php/7.1/fpm/pool.d/z-overrides.conf
+
+  php73:
+    build: phpdocker/php73-fpm
+    container_name: php73
+    working_dir: /application
+    volumes:
+      - .:/application
+      - ./phpdocker/php73-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
+      - ./phpdocker/php73-fpm/z-overrides.conf:/etc/php/7.3/fpm/pool.d/z-overrides.conf

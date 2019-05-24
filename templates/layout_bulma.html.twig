@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="css/bulma/bulma.css">
+</head>
+
+<body>
+<section class="hero">
+    <div class="hero-body">
+        <div class="columns">
+            <div class="column">
+                <h1 class="title">ObjectMap</h1>
+                <h2 class="subtitle">
+                    Exhibition Application
+                </h2>
+            </div>
+            <div class="column text-right">
+                <div class="level-right">
+                    <label>Active PHP version: </label>
+                    <div class="dropdown is-hoverable">
+                        <div class="dropdown-trigger">
+                            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                                <span>{{ phpVersion }}</span>
+                                <span class="icon is-small">
+                                <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            </span>
+                            </button>
+                        </div>
+                        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                            <div class="dropdown-content">
+                                {% for label, url in phpVersions %}
+                                    <a href="{{ url }}" class="dropdown-item">
+                                        {{ label }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="tabs is-centered">
+        <ul>
+            <li class="{% if menu.home is defined %} is-active {% endif %}">
+                <a href="{{ baseUrl }}">Home</a>
+            </li>
+
+            <li class="{% if menu.params is defined %} is-active {% endif %}">
+                <a href="{{ baseUrl }}/params?obj=">Params</a>
+            </li>
+
+            <li class="{% if menu.headers is defined %} is-active {% endif %}">
+                <a href="/headers">Headers</a>
+            </li>
+
+            <li class="{% if menu.cookies is defined %} is-active {% endif %}">
+                <a href="{{ baseUrl }}/cookies">Cookies</a>
+            </li>
+
+            <li class="{% if menu.forms is defined %} is-active {% endif %}">
+                <a href="{{ baseUrl }}/forms">Forms</a>
+            </li>
+
+        </ul>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-fluid">
+        {% block body %}{% endblock %}
+    </div>
+</section>
+
+</body>
+</html>

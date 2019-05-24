@@ -1,0 +1,22 @@
+{% extends 'layout_bulma.html.twig' %}
+
+{% block body %}
+
+    <form method="post" id="form_id" action="/forms">
+
+        <div class="field">
+            <label class="label">Payload</label>
+            <div class="control">
+                <textarea class="textarea" name="payload">O:15:"Components\File":1:{s:8:"filename";s:31:"../../../../../../../etc/passwd";}</textarea>
+            </div>
+        </div>
+
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-link">Submit</button>
+            </div>
+        </div>
+
+    </form>
+
+{% endblock %}
